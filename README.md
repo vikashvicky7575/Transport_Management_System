@@ -66,10 +66,9 @@ Professional stack: React, Redux-Saga, Node.js, Express, MongoDB
 - dotenv (Environment Variables)  
 - Nodemon (Development)
 
-### Deployment
-- Frontend: [Vercel](https://vercel.com)  
-- Backend: [Render](https://render.com)  
-- Database: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+### Project Screeshot Image
+![Login_Image](assets/Login_Page.png)
+
 
 
 ## Installation & Running Locally
