@@ -24,7 +24,7 @@ app.use("/uploads", express.static("uploads"));
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/cement_transport")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("Mongo error:", err));
 
