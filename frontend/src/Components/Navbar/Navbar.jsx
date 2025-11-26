@@ -22,18 +22,6 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className={`nav-item ${styles['navbar__item']}`}>
-              <a className="nav-link" href="/">Dashboard</a>
-            </li>
-            <li className={`nav-item ${styles['navbar__item']}`}>
-              <a className="nav-link" href="/vehicles">Vehicles</a>
-            </li>
-            <li className={`nav-item ${styles['navbar__item']}`}>
-              <a className="nav-link" href="/deliveries">Deliveries</a>
-            </li>
-            <li className={`nav-item ${styles['navbar__item']}`}>
-              <a className="nav-link" href="/tracking">Tracking</a>
-            </li>
-            <li className={`nav-item ${styles['navbar__item']}`}>
               <Link to='/login' className='btn btn-warning'>Admin Panel</Link>
             </li>
           </ul>

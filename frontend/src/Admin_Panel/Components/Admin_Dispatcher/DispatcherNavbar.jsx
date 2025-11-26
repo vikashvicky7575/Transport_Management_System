@@ -1,26 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Dispatcher_Navbar.module.css";
 import { useSelector } from "react-redux";
 import CurrentDateandTime from "../../Pages/DispatchPanel/CurrentDateandTime/CurrentDateandTime";
-import { NavLink } from "react-router-dom";
 
 const DispatcherNavbar = () => {
-  //toggleDropDown
-  const toggleDropdown = (e) => {
-    const container = e.currentTarget.closest(`.${styles.dropdownContainer}`);
-    container.classList.toggle(styles.open);
+  const [openMenu, setOpenMenu] = useState({
+    trip: false,
+    maintenance: false,
+  });
+
+  // debug helper
+  const debugToggle = (key) => {
+    setOpenMenu((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      console.log("toggle:", key, "=>", next[key]);
+      return next;
+    });
   };
 
-  //fetching the dispatchername automatically using redux-saga
+  const toggleTrip = () => debugToggle("trip");
+  const toggleMaintenance = () => debugToggle("maintenance");
+
+  // fetching the dispatchername automatically using redux-saga
   const { authUser } = useSelector((state) => state.authStore);
+
   return (
     <>
       <div className={styles.container}>
         {/* Top Navbar */}
-        <nav
-          className={`navbar navbar-expand-lg navbar-dark ${styles.topNavbar}`}
-        >
+        <nav className={`navbar navbar-expand-lg navbar-dark ${styles.topNavbar}`}>
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               Dispatcher Panel
@@ -51,23 +60,14 @@ const DispatcherNavbar = () => {
                     {authUser?.name ? `Welcome, ${authUser.name}` : "Profile"}
                   </button>
 
-                  <ul
-                    className="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="profileDropdown"
-                  >
+                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                     <li>
-                      <Link
-                        className="dropdown-item"
-                        to="/dispatcher/viewProfile"
-                      >
+                      <Link className="dropdown-item" to="/dispatcher/viewProfile">
                         View Profile
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        className="dropdown-item"
-                        to="/dispatcher/change-password"
-                      >
+                      <Link className="dropdown-item" to="/dispatcher/change-password">
                         Change Password
                       </Link>
                     </li>
@@ -92,9 +92,7 @@ const DispatcherNavbar = () => {
             {/* Dashboard */}
             <NavLink
               className={({ isActive }) =>
-                `nav-link ${styles.navLink} ${
-                  isActive ? styles.activeLink : ""
-                }`
+                `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ""}`
               }
               to="/dispatcher/dashboard"
             >
@@ -105,17 +103,21 @@ const DispatcherNavbar = () => {
             <li className={`nav-item ${styles.dropdownContainer}`}>
               <div
                 className={`nav-link ${styles.navLink} ${styles.dropdownToggle}`}
-                onClick={toggleDropdown}
+                onClick={toggleTrip}
+                role="button"
+                aria-expanded={openMenu.trip}
               >
                 <i className="fas fa-calendar-alt fa-md me-2"></i> Trip Schedule
               </div>
-              <ul className={styles.dropdownMenu}>
+
+              <ul
+                className={`${styles.dropdownMenu} ${openMenu.trip ? styles.open : ""}`}
+                style={{ display: openMenu.trip ? "block" : "none" }}
+              >
                 <li>
                   <NavLink
                     to="/dispatcher/tripSchedule"
-                    className={({ isActive }) =>
-                      `dropdown-item ${isActive ? styles.activeLink : ""}`
-                    }
+                    className={({ isActive }) => `dropdown-item ${isActive ? styles.activeLink : ""}`}
                   >
                     Add Trip
                   </NavLink>
@@ -123,9 +125,7 @@ const DispatcherNavbar = () => {
                 <li>
                   <NavLink
                     to="/dispatcher/vehicleOnTrip"
-                    className={({ isActive }) =>
-                      `dropdown-item ${isActive ? styles.activeLink : ""}`
-                    }
+                    className={({ isActive }) => `dropdown-item ${isActive ? styles.activeLink : ""}`}
                   >
                     OnTrip Vehicle
                   </NavLink>
@@ -136,9 +136,7 @@ const DispatcherNavbar = () => {
             {/* Available Drivers */}
             <NavLink
               className={({ isActive }) =>
-                `nav-link ${styles.navLink} ${
-                  isActive ? styles.activeLink : ""
-                }`
+                `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ""}`
               }
               to="/dispatcher/availableDrivers"
             >
@@ -148,9 +146,7 @@ const DispatcherNavbar = () => {
             {/* Available Vehicles */}
             <NavLink
               className={({ isActive }) =>
-                `nav-link ${styles.navLink} ${
-                  isActive ? styles.activeLink : ""
-                }`
+                `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ""}`
               }
               to="/dispatcher/availableVehicles"
             >
@@ -160,9 +156,7 @@ const DispatcherNavbar = () => {
             {/* Trip History */}
             <NavLink
               className={({ isActive }) =>
-                `nav-link ${styles.navLink} ${
-                  isActive ? styles.activeLink : ""
-                }`
+                `nav-link ${styles.navLink} ${isActive ? styles.activeLink : ""}`
               }
               to="/dispatcher/tripHistory"
             >
@@ -173,40 +167,39 @@ const DispatcherNavbar = () => {
             <li className={`nav-item ${styles.dropdownContainer}`}>
               <div
                 className={`nav-link ${styles.navLink} ${styles.dropdownToggle}`}
-                onClick={toggleDropdown}
+                onClick={toggleMaintenance}
+                role="button"
+                aria-expanded={openMenu.maintenance}
               >
-                <i className="fas fa-calendar-alt fa-md me-2"></i> Under
-                Mainteance
+                <i className="fas fa-calendar-alt fa-md me-2"></i> Under Maintenance
               </div>
-              <ul className={styles.dropdownMenu}>
+
+              <ul
+                className={`${styles.dropdownMenu} ${openMenu.maintenance ? styles.open : ""}`}
+                style={{ display: openMenu.maintenance ? "block" : "none" }}
+              >
                 <li>
                   <NavLink
                     to="/dispatcher/maintenacesForm"
-                    className={({ isActive }) =>
-                      `dropdown-item ${isActive ? styles.activeLink : ""}`
-                    }
+                    className={({ isActive }) => `dropdown-item ${isActive ? styles.activeLink : ""}`}
                   >
-                    Mainteance Form
+                    Maintenance Form
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="/dispatcher/mainteancesList"
-                    className={({ isActive }) =>
-                      `dropdown-item ${isActive ? styles.activeLink : ""}`
-                    }
+                    className={({ isActive }) => `dropdown-item ${isActive ? styles.activeLink : ""}`}
                   >
-                    Mainteance List
+                    Maintenance List
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="/dispatcher/mainteanceHistory"
-                    className={({ isActive }) =>
-                      `dropdown-item ${isActive ? styles.activeLink : ""}`
-                    }
+                    className={({ isActive }) => `dropdown-item ${isActive ? styles.activeLink : ""}`}
                   >
-                    Mainteances History
+                    Maintenance History
                   </NavLink>
                 </li>
               </ul>
