@@ -114,7 +114,7 @@ const TripHistory = () => {
                       {trip.vehicleImage ? (
                         <div className={styles.imageWrapper}>
                           <img
-                            src={`http://localhost:5000/uploads/${trip.vehicleImage}`}
+                            src={`https://transport-management-system-6jtl.onrender.com/uploads/${trip.vehicleImage}`}
                             alt="Vehicle"
                             className={styles.tripImage}
                             loading="lazy"
