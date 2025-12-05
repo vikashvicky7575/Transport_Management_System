@@ -25,7 +25,7 @@ const AvailableDrivers = () => {
         {drivers.map((driver) => (
           <li key={driver._id} className={styles.driverCard}>
             <img
-              src={`http://localhost:5000/uploads/${driver.photo}`} // update path if needed
+              src={`https://transport-management-system-6jtl.onrender.com/uploads/${driver.photo}`} // update path if needed
               alt={driver.driverName}
               className={styles.driverImage}
               onError={(e) => (e.target.src = '/default-driver.jpg')} // fallback image

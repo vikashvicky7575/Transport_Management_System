@@ -25,7 +25,7 @@ const Availablevehicles = () => {
         {vehicles.map((vehicle) => (
           <li key={vehicle._id} className={styles.vehicleCard}>
             <img
-              src={`http://localhost:5000/uploads/${vehicle.vehicleImage}`} // update path if needed
+              src={`https://transport-management-system-6jtl.onrender.com/uploads/${vehicle.vehicleImage}`} // update path if needed
               alt={vehicle.vehicleNumber}
               className={styles.vehicleImage}
               onError={(e) => (e.target.src = '/default-driver.jpg')} // fallback image
