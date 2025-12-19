@@ -52,7 +52,7 @@ const DriverDetails = () => {
                         <div className="col-4" key={d._id}>
                             <div className="card h-100 shadow">
                                 <img
-                                    src={`http://localhost:5000/uploads/${d.photo}`}
+                                    src={`https://transport-management-system-6jtl.onrender.com/uploads/${d.photo}`}
                                     className="card-img-top"
                                     alt={d.driverName}
                                     style={{ height: '250px', objectFit: 'cover' }}

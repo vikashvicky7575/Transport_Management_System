@@ -24,7 +24,7 @@ const Viewvehicles = () => {
                             <div className="card shadow-sm h-100 border-0 rounded-3">
                                 <img
                                     className="card-img-top rounded-top"
-                                    src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${v.vehicleImage}`}
+                                    src={`https://transport-management-system-6jtl.onrender.com/uploads/${v.vehicleImage}`}
                                     alt={v.brandName}
                                     style={{ height: '200px', objectFit: 'cover' }}
                                 />
